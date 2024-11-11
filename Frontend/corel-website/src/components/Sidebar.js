@@ -1,17 +1,28 @@
 // src/components/Sidebar.js
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './Sidebar.css';
 
-function Sidebar() {
+function Sidebar({ sidebarSelection, setSidebarSelection }) {
   return (
     <aside className="sidebar">
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/timesheet">Time Sheet</Link></li>
-        <li><Link to="/comp-request">Comp. Request</Link></li>
-        <li><Link to="/menus">Menus</Link></li>
-      </ul>
+      <button
+        onClick={() => setSidebarSelection("home")}
+        className={sidebarSelection === "home" ? "active" : ""}
+      >
+        Home
+      </button>
+      <button
+        onClick={() => setSidebarSelection("compRequest")}
+        className={sidebarSelection === "compRequest" ? "active" : ""}
+      >
+        Comp. Request
+      </button>
+      <button
+        onClick={() => setSidebarSelection("menus")}
+        className={sidebarSelection === "menus" ? "active" : ""}
+      >
+        Menus
+      </button>
     </aside>
   );
 }

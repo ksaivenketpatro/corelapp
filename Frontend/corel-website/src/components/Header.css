@@ -1,21 +1,29 @@
+/* src/components/Header.css */
+
 .header {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-  }
-  
-  .tabs span {
-    margin-right: 15px;
-    cursor: pointer;
-  }
-  
-  .login-btn {
-    background-color: #555;
-    border: none;
-    color: white;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+}
+
+.tabs button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.tabs button:hover {
+  background-color: #444; /* Darker gray on hover */
+}
+
+.tabs button.active {
+  background-color: #555; /* Different background to show active state */
+  font-weight: bold; /* Optional: Make text bold for active tab */
+}
