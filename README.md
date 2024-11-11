@@ -2,6 +2,12 @@
 
 ## Home Page
 
+## Prerequisite. **Download the Project as a ZIP File**
+- Go to the React App repository.
+- Click on the green **Code** button and select **Download ZIP**.
+- After the ZIP file is downloaded, extract it to a folder on your computer.
+
+
 The Corel App project is divided into three main sections:
 
 1. **Corel Website App**
