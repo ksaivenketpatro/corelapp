@@ -1,8 +1,7 @@
 # Corel App
 
 
-## Prerequisite. **Download the Project as a ZIP File**
-- Go to the React App repository.
+## Prerequisite: **Download the Project as a ZIP File**
 - Click on the green **Code** button and select **Download ZIP**.
 - After the ZIP file is downloaded, extract it to a folder on your computer.
 
