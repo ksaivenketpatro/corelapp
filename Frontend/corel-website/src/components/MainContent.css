@@ -1,0 +1,11 @@
+.main-content {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .content-window {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-top: 10px;
+  }
+  
