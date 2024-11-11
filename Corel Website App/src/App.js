@@ -1,6 +1,6 @@
 // src/App.js
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import MainContent from './components/MainContent';
@@ -20,6 +20,7 @@ function App() {
       <Header headerSelection={headerSelection} setHeaderSelection={setHeaderSelection} />
       <div className="content">
         <Routes>
+        <Route path="/" element={<Navigate to="/component-library" replace />} />
           <Route
             path="/component-library"
             element={
