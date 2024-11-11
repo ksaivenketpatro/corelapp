@@ -10,7 +10,7 @@ The Corel App project is divided into three main sections:
 
 ## Corel Website App
 This page is Website seen to the user.
-To run the frontend application, please refer to the documentation in the [Corel Website App Page](./Corel Website App/README.md).
+To run the frontend application, please refer to the documentation in the [Corel Website App Page](./Corel%20Website%20App/README.md).
 
 ## Data
 The Data folder is used to store databases, if needed, for the Corel App.
