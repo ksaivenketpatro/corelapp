@@ -9,6 +9,7 @@ The Corel App project is divided into three main sections:
 3. **Backend**
 
 ## Frontend
+This page is Website seen to the user.
 To run the frontend application, please refer to the documentation in the [Frontend Page](./Frontend/corel-website/README.md).
 
 ## Data
