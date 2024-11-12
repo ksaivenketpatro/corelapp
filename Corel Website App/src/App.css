@@ -1,17 +1,9 @@
 /* src/App.css */
 
+.app {
+  font-family: Arial, sans-serif;
+}
+
 .content {
-  display: flex;
-  flex-direction: column; /* Allows Header to stay on top */
-}
-
-.main-container {
-  display: flex; /* Sidebar and MainContent are side by side */
-  flex: 1; /* Ensures main-container takes up available space */
-}
-
-.main-content {
-  flex: 1; /* Allows MainContent to take up remaining space */
   padding: 20px;
-  background-color: #f9f9f9; /* Optional: adds a background color */
 }

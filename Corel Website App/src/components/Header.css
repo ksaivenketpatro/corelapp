@@ -2,28 +2,51 @@
 
 .header {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 10px 40px; /* More padding on sides to center the tabs */
   background-color: #333;
   color: white;
 }
 
-.tabs button {
-  background: none;
-  border: none;
+/* Left-aligned Home button */
+.header .home-button {
   color: white;
-  cursor: pointer;
+  text-decoration: none;
   padding: 10px 20px;
   font-size: 16px;
   transition: background-color 0.3s;
 }
 
-.tabs button:hover {
-  background-color: #444; /* Darker gray on hover */
+.header .home-button:hover {
+  background-color: #444;
 }
 
-.tabs button.active {
-  background-color: #555; /* Different background to show active state */
-  font-weight: bold; /* Optional: Make text bold for active tab */
+/* Center-aligned navigation tabs */
+.tabs {
+  display: flex;
+  gap: 15px; /* Space between tabs */
+}
+
+.tabs a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.tabs a:hover {
+  background-color: #444; /* Grey shade on hover */
+}
+
+.tabs a.active {
+  background-color: #555; /* Persistent grey background for active tab */
+  font-weight: bold;
+}
+
+/* Right-aligned version text */
+.version-text {
+  font-size: 16px;
+  color: #bbb;
 }
