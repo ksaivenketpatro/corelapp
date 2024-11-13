@@ -1,8 +1,9 @@
 // src/pages/ComponentLibrary/ComponentLibrary.js
 import React, { useState } from 'react';
 import './ComponentLibrary.css';
-import Sidebar from './Sidebar.js';
-import Table from './Table.js';
+import Sidebar from './Sidebar';
+import Table from './Table';
+import ProductForm from './ProductForm';
 
 function ComponentLibrary() {
   const [selectedContent, setSelectedContent] = useState("home");
@@ -10,14 +11,11 @@ function ComponentLibrary() {
   const [showTable, setShowTable] = useState(false);
 
   const handleSearch = () => {
-    // Show the table after clicking search
     setShowTable(true);
   };
 
   const handleSidebarSelect = (content) => {
     setSelectedContent(content);
-
-    // Reset search query and hide table if navigating to "Search" content
     if (content === "home") {
       setSearchQuery('');
       setShowTable(false);
@@ -27,7 +25,6 @@ function ComponentLibrary() {
   return (
     <div className="component-library">
       <Sidebar setSelectedContent={handleSidebarSelect} />
-
       <div className="main-content">
         {selectedContent === "home" && (
           <div>
@@ -49,6 +46,7 @@ function ComponentLibrary() {
           </div>
         )}
         {selectedContent === "compRequest" && <p>Here you can make a component request.</p>}
+        {selectedContent === "compForm" && <ProductForm />} {/* Renders the ProductForm */}
       </div>
     </div>
   );
