@@ -2,7 +2,12 @@ import React from 'react';
 import './Table.css';
 
 const Table = ({ data }) => {
-  if (data.length === 0) return <p>No data found.</p>;
+  if (data.length === 0) return (
+    <div className="no-data">
+      <span className="icon">🚫</span>
+      No data found
+    </div>
+  );
 
   const columns = Object.keys(data[0]);
 
