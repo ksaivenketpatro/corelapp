@@ -24,17 +24,17 @@ function App() {
           <Route path="/" element={<Home />} />
           
           {/* Parent route for ComponentLibrary */}
-          <Route path="/component-library" element={<ComponentLibrary />}>
+          <Route path="/componentlibrary" element={<ComponentLibrary />}>
             <Route path="searchengine" element={<SearchEngine />} />
             <Route path="requestengine" element={<RequestEngine />} />
             <Route path="productform" element={<ProductForm />} />
           </Route>
           
-          <Route path="/sys-eng" element={<SysEng />} />
+          <Route path="/syseng" element={<SysEng />} />
           <Route path="/mfg" element={<Mfg />} />
           <Route path="/stores" element={<Stores />} />
           <Route path="/purchase" element={<Purchase />} />
-          <Route path="/time-sheet" element={<TimeSheet />} />
+          <Route path="/timesheet" element={<TimeSheet />} />
         </Routes>
       </div>
     </Router>

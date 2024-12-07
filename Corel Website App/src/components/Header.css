@@ -3,50 +3,65 @@
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 10px 40px; /* More padding on sides to center the tabs */
-  background-color: #333;
+  align-items: center; /* Vertically center content */
+  padding: 15px 40px;
+  background-color: #2c3e50; /* Dark background for header */
   color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow under the header */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  
+  width: 100%; /* Full width */
+  height: 30px; /* Fixed header height */
 }
 
-/* Left-aligned Home button */
 .header .home-button {
   color: white;
   text-decoration: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  transition: background-color 0.3s;
+  font-size: 24px;
+  transition: all 0.3s ease-in-out;
 }
 
 .header .home-button:hover {
-  background-color: #444;
+  color: #f39c12; /* Golden color on hover */
+  transform: scale(1.1);
 }
 
-/* Center-aligned navigation tabs */
 .tabs {
   display: flex;
-  gap: 15px; /* Space between tabs */
+  gap: 25px;
 }
 
-.tabs a {
+.tab {
   color: white;
   text-decoration: none;
   padding: 10px 20px;
   font-size: 16px;
-  transition: background-color 0.3s;
+  font-weight: 500;
+  text-transform: uppercase;
+  position: relative;
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
-.tabs a:hover {
-  background-color: #444; /* Grey shade on hover */
+.tab:hover {
+  color: #f39c12;
+  transform: scale(1.05);
 }
 
-.tabs a.active {
-  background-color: #555; /* Persistent grey background for active tab */
+.tab.active {
+  color: #f39c12;
   font-weight: bold;
 }
 
-/* Right-aligned version text */
 .version-text {
   font-size: 16px;
-  color: #bbb;
+  color: #bdc3c7;
+  font-style: italic;
+  text-align: right;
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide any overflow */
+  text-overflow: ellipsis; /* Add ellipsis if text is too long */
+  margin-right: 52px;
 }

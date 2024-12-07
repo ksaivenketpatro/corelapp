@@ -1,14 +1,14 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './ComponentLibrary/Sidebar';
-import './ComponentLibrary.css'; // Correct path based on your structure
+import './ComponentLibrary.css';
 
 function ComponentLibrary() {
   return (
     <div className="component-library">
       <Sidebar />
-      <div className="main-content">
-        <Outlet /> {/* This renders the child routes like searchengine, requestengine, and productform */}
+      <div className="component-library-content">
+        <Outlet />
       </div>
     </div>
   );

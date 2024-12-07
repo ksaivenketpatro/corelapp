@@ -1,12 +1,12 @@
-/* ComponentLibrary.css */
 .component-library {
-  display: flex;
-  height: 100vh; /* Full height for the page */
+  position: relative;
+  /* Subtract header height precisely */
+  margin-top: 60px;
 }
 
-.main-content {
-  flex-grow: 1; /* Main content will take the remaining space */
+.component-library .component-library-content {
+  margin-left: 190px; /* Width of sidebar + some padding */
   padding: 20px;
-  background-color: #f9f9f9;
-  overflow-y: auto;
+  height: 100%; /* Use 100% of parent container */
+  overflow: hidden;
 }
