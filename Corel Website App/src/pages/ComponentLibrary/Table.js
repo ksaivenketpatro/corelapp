@@ -1,36 +1,33 @@
-// src/components/Table.js
 import React from 'react';
+import './Table.css';
 
-// Dummy data for the table
-const dummyData = [
-  { id: 1, name: 'Component A', description: 'Description for Component A' },
-  { id: 2, name: 'Component B', description: 'Description for Component B' },
-  { id: 3, name: 'Component C', description: 'Description for Component C' },
-];
+const Table = ({ data }) => {
+  if (data.length === 0) return <p>No data found.</p>;
 
-function Table() {
+  const columns = Object.keys(data[0]);
+
   return (
     <div className="table-container">
       <table>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
+            {columns.map((col) => (
+              <th key={col}>{col}</th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          {dummyData.map((item) => (
-            <tr key={item.id}>
-              <td>{item.id}</td>
-              <td>{item.name}</td>
-              <td>{item.description}</td>
+          {data.map((row, index) => (
+            <tr key={index}>
+              {columns.map((col) => (
+                <td key={col}>{row[col]}</td>
+              ))}
             </tr>
           ))}
         </tbody>
       </table>
     </div>
   );
-}
+};
 
 export default Table;
