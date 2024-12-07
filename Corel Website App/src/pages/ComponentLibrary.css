@@ -1,0 +1,12 @@
+/* ComponentLibrary.css */
+.component-library {
+  display: flex;
+  height: 100vh; /* Full height for the page */
+}
+
+.main-content {
+  flex-grow: 1; /* Main content will take the remaining space */
+  padding: 20px;
+  background-color: #f9f9f9;
+  overflow-y: auto;
+}

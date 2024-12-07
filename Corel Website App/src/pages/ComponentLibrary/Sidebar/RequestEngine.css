@@ -1,0 +1,28 @@
+/* RequestEngine.css */
+.request-engine-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .request-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .request-form input,
+  .request-form select,
+  .request-form button {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .request-form button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+  }
+  

@@ -1,14 +1,15 @@
-// src/pages/ComponentLibrary/Sidebar.js
 import React from 'react';
+import { Link } from 'react-router-dom';
+import './Sidebar.css';
 
-const Sidebar = ({ setSelectedContent }) => {
+function Sidebar() {
   return (
-    <aside className="sidebar">
-      <button onClick={() => setSelectedContent("home")}>Search</button>
-      <button onClick={() => setSelectedContent("compRequest")}>Request</button>
-      <button onClick={() => setSelectedContent("compForm")}>Comp Form</button> {/* New Button */}
-    </aside>
+    <div className="sidebar">
+      <Link to="searchengine" className="sidebar-item">Search Engine</Link>
+      <Link to="requestengine" className="sidebar-item">Request Engine</Link>
+      <Link to="productform" className="sidebar-item">Product Form</Link>
+    </div>
   );
-};
+}
 
 export default Sidebar;

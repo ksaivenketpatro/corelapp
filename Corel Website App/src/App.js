@@ -2,7 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
-import ComponentLibrary from './pages/ComponentLibrary/ComponentLibrary';
+import ComponentLibrary from './pages/ComponentLibrary';
 import SysEng from './pages/SysEng';
 import Mfg from './pages/Mfg';
 import Stores from './pages/Stores';
@@ -11,6 +11,10 @@ import TimeSheet from './pages/TimeSheet';
 import Home from './pages/Home';
 import './App.css';
 
+import SearchEngine from './pages/ComponentLibrary/Sidebar/SearchEngine';
+import RequestEngine from './pages/ComponentLibrary/Sidebar/RequestEngine';
+import ProductForm from './pages/ComponentLibrary/Sidebar/ProductForm';
+
 function App() {
   return (
     <Router>
@@ -18,7 +22,14 @@ function App() {
       <div className="content">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/component-library" element={<ComponentLibrary />} />
+          
+          {/* Parent route for ComponentLibrary */}
+          <Route path="/component-library" element={<ComponentLibrary />}>
+            <Route path="searchengine" element={<SearchEngine />} />
+            <Route path="requestengine" element={<RequestEngine />} />
+            <Route path="productform" element={<ProductForm />} />
+          </Route>
+          
           <Route path="/sys-eng" element={<SysEng />} />
           <Route path="/mfg" element={<Mfg />} />
           <Route path="/stores" element={<Stores />} />
