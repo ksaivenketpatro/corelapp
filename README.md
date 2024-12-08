@@ -20,4 +20,4 @@ To run the frontend application, please refer to the documentation in the [Corel
 The Data folder is used to store databases, if needed, for the Corel App.
 
 ## Backend
-The Backend section is currently in development.
+The Backend section is currently in development..
