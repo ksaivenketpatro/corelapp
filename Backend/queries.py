@@ -12,3 +12,5 @@ def get_component_query(search_query=None):
         return base_query + search_condition
     else:
         return base_query
+ 
+#test change
