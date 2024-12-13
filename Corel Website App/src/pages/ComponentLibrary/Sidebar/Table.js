@@ -2,7 +2,7 @@
 import React, { useState, useMemo } from 'react';
 import './Table.css';
 
-const Table = ({ data, pageSize = 9 }) => {
+const Table = ({ data, pageSize = 10 }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const columns = useMemo(() => {
