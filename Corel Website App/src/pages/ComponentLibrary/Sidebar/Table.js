@@ -1,36 +1,72 @@
-import React from 'react';
+// Table.js
+import React, { useState, useMemo } from 'react';
 import './Table.css';
 
-const Table = ({ data }) => {
-  if (data.length === 0) return (
-    <div className="no-data">
-      <span className="icon">🚫</span>
-      No data found
-    </div>
-  );
+const Table = ({ data, pageSize = 9 }) => {
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const columns = Object.keys(data[0]);
+  const columns = useMemo(() => {
+    if (data && data.length > 0) {
+      return Object.keys(data[0]);
+    }
+    return [];
+  }, [data]);
+
+  const totalPages = Math.ceil(data.length / pageSize);
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = Math.min(startIndex + pageSize, data.length);
+  const paginatedData = data.slice(startIndex, endIndex);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  if (!data || data.length === 0) {
+    return (
+      <div className="no-data">
+        <span className="icon">🚫</span>
+        No data found
+      </div>
+    );
+  }
 
   return (
     <div className="table-container">
       <table>
         <thead>
           <tr>
-            {columns.map((col) => (
-              <th key={col}>{col}</th>
+            {columns.map((column) => (
+              <th key={column}>{column}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {data.map((row, index) => (
+          {paginatedData.map((row, index) => (
             <tr key={index}>
-              {columns.map((col) => (
-                <td key={col}>{row[col]}</td>
+              {columns.map((column) => (
+                <td key={column}>{row[column]}</td>
               ))}
             </tr>
           ))}
         </tbody>
       </table>
+      <div className="pagination">
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="pagination-button"
+        >
+          Previous
+        </button>
+        <span className="page-number">{currentPage} of {totalPages}</span>
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className="pagination-button"
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };
