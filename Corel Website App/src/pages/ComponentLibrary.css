@@ -1,12 +1,10 @@
 .component-library {
   position: relative;
-  /* Subtract header height precisely */
-  margin-top: 60px;
 }
 
 .component-library .component-library-content {
-  margin-left: 190px; /* Width of sidebar + some padding */
-  padding: 20px;
+  margin-left: 195px; /* Width of sidebar + some padding */
+  margin-right: 10px;
   height: 100%; /* Use 100% of parent container */
   overflow: hidden;
 }
