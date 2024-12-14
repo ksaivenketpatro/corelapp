@@ -105,6 +105,14 @@ td:hover {
   font-size: 14px;
   color: #555;
 }
+.table-row-clickable {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.table-row-clickable:hover {
+  background-color: #e6f3ff !important;
+}
 
 @media (max-width: 768px) {
   table {

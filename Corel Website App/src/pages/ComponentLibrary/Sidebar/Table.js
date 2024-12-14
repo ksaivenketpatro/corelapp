@@ -2,7 +2,7 @@
 import React, { useState, useMemo } from 'react';
 import './Table.css';
 
-const Table = ({ data, pageSize = 10 }) => {
+const Table = ({ data, pageSize = 10, onRowClick }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const columns = useMemo(() => {
@@ -19,6 +19,12 @@ const Table = ({ data, pageSize = 10 }) => {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
+  };
+
+  const handleRowClick = (row) => {
+    if (typeof onRowClick === 'function') {
+      onRowClick(row);
+    }
   };
 
   if (!data || data.length === 0) {
@@ -42,7 +48,11 @@ const Table = ({ data, pageSize = 10 }) => {
         </thead>
         <tbody>
           {paginatedData.map((row, index) => (
-            <tr key={index}>
+            <tr 
+              key={index}
+              onClick={() => handleRowClick(row)}
+              style={{ cursor: 'pointer' }}
+            >
               {columns.map((column) => (
                 <td key={column}>{row[column]}</td>
               ))}

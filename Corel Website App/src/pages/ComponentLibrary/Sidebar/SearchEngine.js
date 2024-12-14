@@ -1,34 +1,30 @@
+// SearchEngine.js
 import React, { useState } from 'react';
-import { FaSearch, FaTimes } from 'react-icons/fa';  // Importing additional icons for clear button
 import Table from './Table';
-import './SearchEngine.css';  // Importing the CSS
+import ProductInfo from './ProductInfo';
+import './SearchEngine.css';
 
 function SearchEngine() {
   const [searchQuery, setSearchQuery] = useState('');
   const [components, setComponents] = useState([]);
-  const [showTable, setShowTable] = useState(false);
-  const [loading, setLoading] = useState(false);  // New state for loading
+  const [loading, setLoading] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const handleSearch = async () => {
-    if (searchQuery.trim()) {
-      setLoading(true);  // Start loading when search begins
-      try {
-        const response = await fetch(`http://localhost:5000/api/components?search=${searchQuery}`);
-        const data = await response.json();
-        setComponents(data);
-        setShowTable(true);
-      } catch (error) {
-        console.error("Error fetching components:", error);
-      } finally {
-        setLoading(false);  // Stop loading after fetch is complete
-      }
+    setLoading(true);
+    try {
+      const response = await fetch(`http://localhost:5000/api/components?search=${searchQuery}`);
+      const data = await response.json();
+      setComponents(data);
+    } catch (error) {
+      console.error('Error:', error);
     }
+    setLoading(false);
   };
 
   const handleClear = () => {
     setSearchQuery('');
     setComponents([]);
-    setShowTable(false);
   };
 
   return (
@@ -36,28 +32,46 @@ function SearchEngine() {
       <div className="search-bar">
         <input
           type="text"
-          placeholder="Search components..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+          placeholder="Search components..."
         />
-        <button onClick={handleSearch} disabled={!searchQuery.trim()}>
-          <FaSearch size={18} /> Search
+        <button 
+          onClick={handleSearch} 
+          disabled={!searchQuery || loading}
+        >
+          {loading ? 'Searching...' : 'Search'}
         </button>
         {searchQuery && (
           <button className="clear-btn" onClick={handleClear}>
-            <FaTimes size={18} />
+            ×
           </button>
         )}
       </div>
 
-      {loading ? (
-        <div className="loading-indicator">Loading...</div>
+      {loading && (
+        <div className="loading-indicator">
+          Loading...
+        </div>
+      )}
+
+      {selectedProduct ? (
+        <ProductInfo 
+          product={selectedProduct} 
+          onBack={() => setSelectedProduct(null)}
+        />
       ) : (
-        showTable && <Table data={components} />
+        components.length > 0 && (
+          <div className="search-results">
+            <Table 
+              data={components} 
+              onRowClick={(product) => setSelectedProduct(product)}
+            />
+          </div>
+        )
       )}
     </div>
   );
 }
 
-export default SearchEngine;
+export default SearchEngine;  // Add this export statement
