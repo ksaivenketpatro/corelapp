@@ -12,10 +12,18 @@ function SearchEngine() {
 
   const handleSearch = async () => {
     setLoading(true);
+    setSelectedProduct(null);
     try {
       const response = await fetch(`http://localhost:5000/api/components?search=${searchQuery}`);
       const data = await response.json();
-      setComponents(data);
+      
+      // If only one result, show ProductInfo directly
+      if (data.length === 1) {
+        setSelectedProduct(data[0]);
+        setComponents([]); // Clear components as we're showing ProductInfo
+      } else {
+        setComponents(data);
+      }
     } catch (error) {
       console.error('Error:', error);
     }
@@ -25,6 +33,7 @@ function SearchEngine() {
   const handleClear = () => {
     setSearchQuery('');
     setComponents([]);
+    setSelectedProduct(null);
   };
 
   return (
@@ -56,10 +65,7 @@ function SearchEngine() {
       )}
 
       {selectedProduct ? (
-        <ProductInfo 
-          product={selectedProduct} 
-          onBack={() => setSelectedProduct(null)}
-        />
+        <ProductInfo product={selectedProduct} />
       ) : (
         components.length > 0 && (
           <div className="search-results">
@@ -74,4 +80,4 @@ function SearchEngine() {
   );
 }
 
-export default SearchEngine;  // Add this export statement
+export default SearchEngine;
