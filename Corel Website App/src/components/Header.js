@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';  // Add useEffect
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';  // Added useEffect
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaHome, FaUser } from 'react-icons/fa';
 import LoginModal from './LoginModal';
 import './Header.css';
 
 function Header() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [user, setUser] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
 
-  // Add useEffect to check for stored user data on component mount
+  // Add this useEffect to check for stored user data on component mount
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
@@ -18,18 +19,21 @@ function Header() {
     }
   }, []);
 
-  const handleLogin = (userData) => {
-    // Store the entire user object
-    localStorage.setItem('user', JSON.stringify(userData.user));
-    setUser(userData.user);
-    setShowLoginModal(false);
+  const handleTabClick = (path) => {
+    if (!user) {
+      setShowLoginModal(true);
+      localStorage.setItem('attemptedPath', path);
+      return;
+    }
+    navigate(path);
   };
 
   const handleLogout = () => {
     setUser(null);
     localStorage.removeItem('user');
-    localStorage.removeItem('token');  // Also remove the token
+    localStorage.removeItem('token');
     setShowDropdown(false);
+    navigate('/');
   };
 
   return (
@@ -43,6 +47,10 @@ function Header() {
           <Link
             key={tab}
             to={`/${tab.replace(/\s+/g, '').toLowerCase()}`}
+            onClick={(e) => {
+              e.preventDefault();
+              handleTabClick(`/${tab.replace(/\s+/g, '').toLowerCase()}`);
+            }}
             className={`tab ${location.pathname.includes(tab.replace(/\s+/g, '').toLowerCase()) ? 'active' : ''}`}
           >
             {tab}
@@ -78,7 +86,16 @@ function Header() {
       {showLoginModal && (
         <LoginModal 
           onClose={() => setShowLoginModal(false)}
-          onLogin={handleLogin}  // Use the new handleLogin function
+          onLogin={(userData) => {
+            setUser(userData.user);  // Changed this line to use userData.user
+            localStorage.setItem('user', JSON.stringify(userData.user));
+            setShowLoginModal(false);
+            const attemptedPath = localStorage.getItem('attemptedPath');
+            if (attemptedPath) {
+              navigate(attemptedPath);
+              localStorage.removeItem('attemptedPath');
+            }
+          }}
         />
       )}
     </div>

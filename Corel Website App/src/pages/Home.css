@@ -2,7 +2,9 @@
 
 .home-container {
     text-align: center;
-    margin-top: 50px;
+    margin-top: 200px;
+    margin-left: 40px;
+    margin-right: 40px;
     padding: 20px;
     background-color: #ecf0f1; /* Light background color for contrast */
     border-radius: 10px;
