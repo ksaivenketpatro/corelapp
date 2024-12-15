@@ -1,0 +1,37 @@
+.under-construction {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed; /* Add this to prevent scrolling */
+    top: 80px; /* Position below header */
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #2c3e50;
+    padding: 20px;
+  }
+  
+  .construction-icon {
+    color: #f39c12;
+    margin-bottom: 20px;
+    animation: spin 4s linear infinite;
+  }
+  
+  .under-construction h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .under-construction p {
+    font-size: 16px;
+    color: #7f8c8d;
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }

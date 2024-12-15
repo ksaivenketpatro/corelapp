@@ -1,50 +1,14 @@
-// src/pages/ComponentLibrary/ProductForm.js
+// src/pages/ComponentLibrary/Sidebar/ProductForm.js - Update to show construction message
 import React from 'react';
+import { FaTools } from 'react-icons/fa'; // Import tools icon
 import './ProductForm.css';
 
 const ProductForm = () => {
   return (
-    <div className="product-form">
-      <header className="search-bar">
-        <input type="text" placeholder="Search..." />
-        <button className="search-button">🔍</button>
-        <button className="request-cart">Request Cart</button>
-      </header>
-
-      <section className="main-content">
-        <div className="image-section">
-          <div className="main-image">Image</div>
-          <div className="image-icons">Image Icons</div>
-        </div>
-
-        <div className="product-details">
-          <p>CoreEL Part Number</p>
-          <p>Manufacturer</p>
-          <p>Manufacturer Part Number</p>
-          <p>Description</p>
-          <p>Static Text</p>
-        </div>
-
-        <div className="display-results">
-          <p>Display results</p>
-        </div>
-
-        <div className="inventory-status">
-          <p>Inventory Status and Request</p>
-        </div>
-
-        <div className="product-documents">
-          <p>Product Documents</p>
-        </div>
-
-        <div className="product-attributes">
-          <p>Product Attributes</p>
-        </div>
-
-        <div className="product-remarks">
-          <p>Product Remarks</p>
-        </div>
-      </section>
+    <div className="under-construction">
+      <FaTools size={50} className="construction-icon" />
+      <h2>Order Page Under Construction</h2>
+      <p>We're working hard to bring you an amazing ordering experience!</p>
     </div>
   );
 };

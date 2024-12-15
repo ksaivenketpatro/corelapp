@@ -1,7 +1,6 @@
-// src/components/Sidebar.js
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaSearch, FaCogs, FaBox } from 'react-icons/fa'; // Importing icons for the sidebar items
+import { FaSearch, FaCogs, FaShoppingCart } from 'react-icons/fa'; // Changed FaBox to FaShoppingCart
 import './Sidebar.css';
 
 function Sidebar() {
@@ -10,28 +9,28 @@ function Sidebar() {
   return (
     <div className="sidebar">
       <Link 
-        to="/componentlibrary/searchengine"  // Make sure to include the full path
+        to="/componentlibrary/searchengine"
         className={`sidebar-item ${location.pathname === '/componentlibrary/searchengine' ? 'active' : ''}`}
         aria-label="Search Engine"
       >
-        <FaSearch size={20} /> {/* Search Engine Icon */}
-        Search Engine
+        <FaSearch size={20} />
+        Search
       </Link>
       <Link 
-        to="/componentlibrary/requestengine"  // Make sure to include the full path
+        to="/componentlibrary/requestengine"
         className={`sidebar-item ${location.pathname === '/componentlibrary/requestengine' ? 'active' : ''}`}
         aria-label="Request Engine"
       >
-        <FaCogs size={20} /> {/* Request Engine Icon */}
-        Request Engine
+        <FaCogs size={20} />
+        Request
       </Link>
       <Link 
-        to="/componentlibrary/productform"  // Make sure to include the full path
+        to="/componentlibrary/productform"
         className={`sidebar-item ${location.pathname === '/componentlibrary/productform' ? 'active' : ''}`}
-        aria-label="Product Form"
+        aria-label="Order Page"
       >
-        <FaBox size={20} /> {/* Product Form Icon */}
-        Product Form
+        <FaShoppingCart size={20} />
+        Orders
       </Link>
     </div>
   );
