@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';  // Add useEffect
 import { Link, useLocation } from 'react-router-dom';
 import { FaHome, FaUser } from 'react-icons/fa';
 import LoginModal from './LoginModal';
@@ -10,9 +10,25 @@ function Header() {
   const [user, setUser] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
 
+  // Add useEffect to check for stored user data on component mount
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  const handleLogin = (userData) => {
+    // Store the entire user object
+    localStorage.setItem('user', JSON.stringify(userData.user));
+    setUser(userData.user);
+    setShowLoginModal(false);
+  };
+
   const handleLogout = () => {
     setUser(null);
     localStorage.removeItem('user');
+    localStorage.removeItem('token');  // Also remove the token
     setShowDropdown(false);
   };
 
@@ -54,7 +70,7 @@ function Header() {
             className="login-button"
             onClick={() => setShowLoginModal(true)}
           >
-            Login
+            <FaUser /> Login
           </button>
         )}
       </div>
@@ -62,10 +78,7 @@ function Header() {
       {showLoginModal && (
         <LoginModal 
           onClose={() => setShowLoginModal(false)}
-          onLogin={(userData) => {
-            setUser(userData);
-            setShowLoginModal(false);
-          }}
+          onLogin={handleLogin}  // Use the new handleLogin function
         />
       )}
     </div>

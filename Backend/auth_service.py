@@ -3,14 +3,13 @@ from flask import jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
 from datetime import datetime, timedelta
+import bcrypt
 
 class AuthService:
     def __init__(self, db_connection, secret_key):
-        # Just store the connection passed from app.py
         self.connection = db_connection
         self.secret_key = secret_key
 
-    # Rest of the AuthService class remains the same...
     def register_user(self, data):
         try:
             username = data.get('username')
@@ -20,19 +19,21 @@ class AuthService:
             if not username or not password or not email:
                 return jsonify({'error': 'Missing required fields'}), 400
 
-            hashed_password = generate_password_hash(password)
+            # Generate a salt and hash the password using bcrypt
+            salt = bcrypt.gensalt(rounds=12)
+            hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
 
             with self.connection.cursor() as cursor:
                 # Check if user exists
-                cursor.execute("SELECT * FROM users WHERE username = %s OR email = %s", 
+                cursor.execute("SELECT * FROM users WHERE username = ? OR email = ?", 
                              (username, email))
                 if cursor.fetchone():
                     return jsonify({'error': 'Username or email already exists'}), 409
 
                 # Create new user
                 cursor.execute(
-                    "INSERT INTO users (username, password, email) VALUES (%s, %s, %s)",
-                    (username, hashed_password, email)
+                    "INSERT INTO users (username, password, email) VALUES (?, ?, ?)",
+                    (username, hashed_password.decode('utf-8'), email)
                 )
                 self.connection.commit()
 
@@ -51,24 +52,34 @@ class AuthService:
                 return jsonify({'error': 'Missing credentials'}), 400
 
             with self.connection.cursor() as cursor:
-                cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
-                user = cursor.fetchone()
+                cursor.execute("SELECT id, username, password, email FROM users WHERE username = ?", (username,))
+                row = cursor.fetchone()
+                
+                if row:
+                    # Convert row to dictionary with column names
+                    user = {
+                        'id': row[0],          # id
+                        'username': row[1],     # username
+                        'password': row[2],     # password
+                        'email': row[3]         # email
+                    }
 
-                if user and check_password_hash(user['password'], password):
-                    token = jwt.encode({
-                        'user_id': user['id'],
-                        'username': user['username'],
-                        'exp': datetime.utcnow() + timedelta(hours=24)
-                    }, self.secret_key)
-
-                    return jsonify({
-                        'token': token,
-                        'user': {
-                            'id': user['id'],
+                    if bcrypt.checkpw(password.encode('utf-8'), 
+                                    user['password'].encode('utf-8')):
+                        token = jwt.encode({
+                            'user_id': user['id'],
                             'username': user['username'],
-                            'email': user['email']
-                        }
-                    }), 200
+                            'exp': datetime.utcnow() + timedelta(hours=24)
+                        }, self.secret_key)
+
+                        return jsonify({
+                            'token': token,
+                            'user': {
+                                'id': user['id'],
+                                'username': user['username'],
+                                'email': user['email']
+                            }
+                        }), 200
 
             return jsonify({'error': 'Invalid credentials'}), 401
 
@@ -84,3 +95,21 @@ class AuthService:
             return data['user_id']
         except:
             return None
+
+    def get_user_profile(self, user_id):
+        try:
+            with self.connection.cursor() as cursor:
+                cursor.execute("SELECT id, username, email FROM users WHERE id = ?", 
+                             (user_id,))
+                row = cursor.fetchone()
+                if row:
+                    user = {
+                        'id': row[0],
+                        'username': row[1],
+                        'email': row[2]
+                    }
+                    return jsonify(user), 200
+                return jsonify({'error': 'User not found'}), 404
+        except Exception as e:
+            print(f"Error fetching user profile: {e}")
+            return jsonify({'error': 'Internal Server Error'}), 500
